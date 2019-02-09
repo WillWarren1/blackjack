@@ -76,6 +76,26 @@ const main = () => {
   shuffleDeck()
 }
 
+const disableButton = () => {
+  document.querySelector('.deal').disabled = true
+}
+
+const dealRoundOne = () => {
+  let firstCard = deckOfCards.shift()
+  let secondCard = deckOfCards.pop()
+  console.log(deckOfCards)
+  const _li = document.createElement('li')
+  _li.textContent = firstCard.Name
+  document.querySelector('ul').appendChild(_li)
+  const _lii = document.createElement('li')
+  _lii.textContent = secondCard.Name
+  document.querySelector('ul').appendChild(_lii)
+  playerHand.push(firstCard)
+  playerHand.push(secondCard)
+  console.log(playerHand)
+  disableButton()
+}
+
 const drawCards = () => {
   let newCard = deckOfCards.shift(0, 1)
 
@@ -92,3 +112,4 @@ const drawCards = () => {
 
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('#draw').addEventListener('click', drawCards)
+document.querySelector('.deal').addEventListener('click', dealRoundOne)
