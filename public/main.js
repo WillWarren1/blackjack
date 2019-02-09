@@ -20,6 +20,11 @@ let deckOfCards = []
 
 let playerHand = []
 
+let dealerHand = []
+
+let playerPoints = []
+let dealerPoints = []
+
 const buildDeck = () => {
   for (let cardValue = 0; cardValue < valueOfCard.length; cardValue++) {
     console.log(cardValue)
@@ -80,6 +85,21 @@ const disableButton = () => {
   document.querySelector('.deal').disabled = true
 }
 
+const dealDealer = () => {
+  let dealerFirst = deckOfCards.shift()
+  let dealerSecond = deckOfCards.pop()
+  dealerHand.push(dealerFirst)
+  dealerHand.push(dealerSecond)
+  console.log(dealerHand)
+
+  let dealerScore = dealerFirst.Weight + dealerSecond.Weight
+  if (dealerScore > 21) {
+    console.log('dealer loses')
+  }
+  console.log(dealerScore)
+  dealerPoints.push(dealerScore)
+}
+
 const dealRoundOne = () => {
   let firstCard = deckOfCards.shift()
   let secondCard = deckOfCards.pop()
@@ -93,6 +113,18 @@ const dealRoundOne = () => {
   playerHand.push(firstCard)
   playerHand.push(secondCard)
   console.log(playerHand)
+
+  let score = firstCard.Weight + secondCard.Weight
+
+  if (score > 21) {
+    console.log('player loses')
+  }
+  playerPoints.push(score)
+
+  dealDealer()
+
+  console.log(playerHand)
+  console.log(score)
   disableButton()
 }
 
@@ -108,6 +140,9 @@ const drawCards = () => {
     playerHand.push(newCard)
     console.log(playerHand)
   }
+  let points = newCard.Weight
+  playerPoints.push(points)
+  console.log(playerPoints)
 }
 
 document.addEventListener('DOMContentLoaded', main)
