@@ -27,10 +27,7 @@ let dealerPoints = []
 
 const buildDeck = () => {
   for (let cardValue = 0; cardValue < valueOfCard.length; cardValue++) {
-    console.log(cardValue)
     for (let cardSuit = 0; cardSuit < suitOfCard.length; cardSuit++) {
-      console.log(cardSuit)
-
       let weight = parseInt(valueOfCard[cardValue])
       if (
         valueOfCard[cardValue] == 'jack' ||
@@ -81,8 +78,13 @@ const main = () => {
   shuffleDeck()
 }
 
-const disableButton = () => {
+const disableDeal = () => {
   document.querySelector('.deal').disabled = true
+}
+const stand = () => {
+  document.querySelector('#draw').disabled = true
+  document.querySelector('.dealHand').classList.add('revealDeal')
+  document.querySelector('.revealDeal').classList.remove('dealHand')
 }
 
 const dealDealer = () => {
@@ -91,13 +93,17 @@ const dealDealer = () => {
   dealerHand.push(dealerFirst)
   dealerHand.push(dealerSecond)
   console.log(dealerHand)
+  const _li = document.createElement('li')
+  _li.textContent = dealerFirst.Name
+  document.querySelector('.dealHand').appendChild(_li)
+  const _lii = document.createElement('li')
+  _lii.textContent = dealerSecond.Name
+  document.querySelector('.dealHand').appendChild(_lii)
 
   let dealerScore = dealerFirst.Weight + dealerSecond.Weight
-  if (dealerScore > 21) {
-    console.log('dealer loses')
-  }
-  console.log(dealerScore)
+
   dealerPoints.push(dealerScore)
+  console.log(dealerScore)
 }
 
 const dealRoundOne = () => {
@@ -112,7 +118,6 @@ const dealRoundOne = () => {
   document.querySelector('ul').appendChild(_lii)
   playerHand.push(firstCard)
   playerHand.push(secondCard)
-  console.log(playerHand)
 
   let score = firstCard.Weight + secondCard.Weight
 
@@ -123,15 +128,33 @@ const dealRoundOne = () => {
 
   dealDealer()
 
-  console.log(playerHand)
   console.log(score)
-  disableButton()
+  disableDeal()
+}
+
+const hitDealer = () => {
+  let newCard = deckOfCards.shift(0, 1)
+  if (deckOfCards.length > 0 && dealerPoints < 17) {
+    const _li = document.createElement('li')
+    _li.textContent = newCard.Name
+    document.querySelector('.dealHand').appendChild(_li)
+
+    dealerHand.push(newCard)
+
+    let dealPoints = newCard.Weight + dealerPoints[0]
+    dealerPoints.push(dealPoints)
+    dealerPoints.shift()
+    console.log(dealerHand)
+    console.log(dealerPoints)
+    if (dealerPoints[0] > 21) {
+      console.log('you win')
+    }
+  }
 }
 
 const drawCards = () => {
   let newCard = deckOfCards.shift(0, 1)
 
-  console.log(deckOfCards)
   if (deckOfCards.length > 0) {
     const _li = document.createElement('li')
     _li.textContent = newCard.Name
@@ -148,8 +171,10 @@ const drawCards = () => {
   if (playerPoints[0] > 21) {
     console.log('you lose')
   }
+  hitDealer()
 }
 
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('#draw').addEventListener('click', drawCards)
 document.querySelector('.deal').addEventListener('click', dealRoundOne)
+document.querySelector('.stand').addEventListener('click', stand)

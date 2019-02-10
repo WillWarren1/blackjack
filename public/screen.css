@@ -30,6 +30,12 @@ h1 {
   height: 15rem;
   align-items: center;
 }
+.dealHand {
+  display: none;
+}
+.revealDeal {
+  background-color: rgb(155, 0, 0);
+}
 
 ul {
   display: flex;
