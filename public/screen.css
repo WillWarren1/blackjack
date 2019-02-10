@@ -17,6 +17,9 @@ h1 {
 }
 
 #draw {
+  margin-left: 12%;
+}
+#deck {
   border: solid black;
   background-color: green;
   margin-left: 34%;
