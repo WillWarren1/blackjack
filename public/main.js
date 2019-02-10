@@ -69,11 +69,38 @@ const shuffleDeck = () => {
   console.log(deckOfCards)
 }
 
+const resetGame = () => {
+  deckOfCards.length = 0
+  playerHand.length = 0
+  dealerHand.length = 0
+  playerPoints.length = 0
+  dealerPoints.length = 0
+  console.log(playerHand)
+  main()
+  console.log(deckOfCards)
+}
+
+const announceWinner = () => {
+  const winnerScreen = document.createElement('article')
+  if (playerPoints <= 21 && playerPoints > dealerPoints) {
+    winnerScreen.textContent = 'You Win!'
+  }
+  if (dealerPoints <= 21 && playerPoints < dealerPoints) {
+    winnerScreen.textContent = 'You Lose!'
+  }
+  if (playerPoints == dealerPoints && playerPoints <= 21) {
+    winnerScreen.textContent = 'Tie!'
+  }
+  document.querySelector('main').appendChild(winnerScreen)
+  document.querySelector('.reset').disabled = false
+}
+
 const main = () => {
   if (document.querySelector('h1.hello-world')) {
     document.querySelector('h1.hello-world').textContent =
       "Let's play Blackjack!"
   }
+  document.querySelector('.reset').disabled = true
   buildDeck()
   shuffleDeck()
 }
@@ -100,6 +127,7 @@ const stand = () => {
       console.log('dealer loses')
     }
   }
+  announceWinner()
 }
 
 const dealDealer = () => {
@@ -193,3 +221,4 @@ document.addEventListener('DOMContentLoaded', main)
 document.querySelector('#draw').addEventListener('click', drawCards)
 document.querySelector('.deal').addEventListener('click', dealRoundOne)
 document.querySelector('.stand').addEventListener('click', stand)
+document.querySelector('.reset').addEventListener('click', resetGame)

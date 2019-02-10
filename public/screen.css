@@ -42,6 +42,13 @@ ul {
   flex-wrap: wrap;
 }
 
+article {
+  background-color: blue;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+}
+
 li {
   list-style: none;
   margin: 1rem;
