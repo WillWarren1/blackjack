@@ -140,9 +140,14 @@ const drawCards = () => {
     playerHand.push(newCard)
     console.log(playerHand)
   }
-  let points = newCard.Weight
+
+  let points = newCard.Weight + playerPoints[0]
   playerPoints.push(points)
+  playerPoints.shift()
   console.log(playerPoints)
+  if (playerPoints[0] > 21) {
+    console.log('you lose')
+  }
 }
 
 document.addEventListener('DOMContentLoaded', main)
