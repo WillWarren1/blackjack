@@ -85,6 +85,21 @@ const stand = () => {
   document.querySelector('#draw').disabled = true
   document.querySelector('.dealHand').classList.add('revealDeal')
   document.querySelector('.revealDeal').classList.remove('dealHand')
+  let newCard = deckOfCards.shift(0, 1)
+  while (dealerPoints < 17 && deckOfCards.length > 0) {
+    const _li = document.createElement('li')
+    _li.textContent = newCard.Name
+    document.querySelector('.revealDeal').appendChild(_li)
+
+    dealerHand.push(newCard)
+
+    let dealPoints = newCard.Weight + dealerPoints[0]
+    dealerPoints.push(dealPoints)
+    dealerPoints.shift()
+    if (dealerPoints[0] > 21) {
+      console.log('dealer loses')
+    }
+  }
 }
 
 const dealDealer = () => {
