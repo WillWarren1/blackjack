@@ -71,10 +71,16 @@ const shuffleDeck = () => {
 
 const announceWinner = () => {
   const winnerScreen = document.createElement('article')
-  if (playerPoints <= 21 && playerPoints > dealerPoints) {
+  if (
+    (playerPoints <= 21 && playerPoints > dealerPoints) ||
+    dealerPoints > 21
+  ) {
     winnerScreen.textContent = 'You Win!'
   }
-  if (dealerPoints <= 21 && playerPoints < dealerPoints) {
+  if (
+    (dealerPoints <= 21 && playerPoints < dealerPoints) ||
+    playerPoints > 21
+  ) {
     winnerScreen.textContent = 'You Lose, Dealer Wins!'
   }
   if (playerPoints[0] == dealerPoints[0]) {
