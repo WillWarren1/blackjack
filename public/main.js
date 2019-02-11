@@ -75,7 +75,7 @@ const announceWinner = () => {
     winnerScreen.textContent = 'You Win!'
   }
   if (dealerPoints <= 21 && playerPoints < dealerPoints) {
-    winnerScreen.textContent = 'You Lose!'
+    winnerScreen.textContent = 'You Lose, Dealer Wins!'
   }
   if (playerPoints[0] == dealerPoints[0]) {
     winnerScreen.textContent = 'Tie!'
