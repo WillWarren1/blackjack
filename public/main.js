@@ -69,17 +69,6 @@ const shuffleDeck = () => {
   console.log(deckOfCards)
 }
 
-const resetGame = () => {
-  deckOfCards.length = 0
-  playerHand.length = 0
-  dealerHand.length = 0
-  playerPoints.length = 0
-  dealerPoints.length = 0
-  console.log(playerHand)
-  main()
-  console.log(deckOfCards)
-}
-
 const announceWinner = () => {
   const winnerScreen = document.createElement('article')
   if (playerPoints <= 21 && playerPoints > dealerPoints) {
@@ -88,7 +77,7 @@ const announceWinner = () => {
   if (dealerPoints <= 21 && playerPoints < dealerPoints) {
     winnerScreen.textContent = 'You Lose!'
   }
-  if (playerPoints == dealerPoints && playerPoints <= 21) {
+  if (playerPoints[0] == dealerPoints[0]) {
     winnerScreen.textContent = 'Tie!'
   }
   document.querySelector('main').appendChild(winnerScreen)
@@ -215,6 +204,26 @@ const drawCards = () => {
     console.log('you lose')
   }
   hitDealer()
+}
+
+const resetGame = () => {
+  deckOfCards.length = 0
+  playerHand.length = 0
+  dealerHand.length = 0
+  playerPoints.length = 0
+  dealerPoints.length = 0
+  console.log(playerHand)
+  main()
+  console.log(deckOfCards)
+
+  while (document.querySelector('li')) {
+    document.querySelector('li').remove()
+  }
+  document.querySelector('article').remove()
+  document.querySelector('.deal').disabled = false
+  document.querySelector('.revealDeal').classList.add('dealHand')
+  document.querySelector('.dealHand').classList.remove('revealDeal')
+  document.querySelector('#draw').disabled = false
 }
 
 document.addEventListener('DOMContentLoaded', main)
