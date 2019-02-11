@@ -87,7 +87,7 @@ const announceWinner = () => {
 const main = () => {
   if (document.querySelector('h1.hello-world')) {
     document.querySelector('h1.hello-world').textContent =
-      "Let's play Blackjack!"
+      "Let's play Blackjack!!"
   }
   document.querySelector('.reset').disabled = true
   buildDeck()
